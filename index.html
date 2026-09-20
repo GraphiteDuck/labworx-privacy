@@ -113,6 +113,28 @@
       margin-bottom: 10px;
     }
 
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border: 1px solid #2a2a2a;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #1a1a1a;
+      color: var(--accent);
+    }
+
+    td {
+      color: #d1d1d1;
+    }
+
     a {
       color: var(--accent);
       text-decoration: none;
@@ -137,40 +159,74 @@
 <div class="container">
   <h1>Privacy Policy</h1>
   <div class="subheading">
-    <strong>LabWorx Mobile Applications</strong> &bull; Last updated: September 18, 2026
+    <strong>LabWorx Mobile Applications</strong> &bull; Effective Date: September 20, 2026
   </div>
 
   <p>
-    This Privacy Policy governs the mobile software applications developed and published by <strong>LabWorx</strong> ("we", "us", or "our"), including <strong>LabWorx Managed Config Demo</strong>, <strong>LabWorx LostMode</strong>, and any future utility applications distributed via Google Play and Managed Google Play.
+    This Privacy Policy governs the mobile software applications developed and published by <strong>LabWorx</strong> ("we", "us", or "our"), including <strong>LabWorx Virtual Buttons</strong>, <strong>LabWorx Managed Config Demo</strong>, <strong>LabWorx LostMode</strong>, and any utility applications distributed via Google Play and Managed Google Play.
   </p>
 
-  <h2>1. General Principle: Zero Data Collection</h2>
+  <h2>1. General Principle: Zero Remote Data Collection</h2>
   <p>
     All LabWorx applications operate with a strict <strong>Zero Remote Data Collection</strong> architecture:
   </p>
   <ul>
-    <li>We do not collect, process, track, transmit, or monetize any personal identifiable information (PII) or device data.</li>
-    <li>Our applications run completely offline without remote telemetry, crash logging tools, or third-party analytics trackers.</li>
-    <li>Our applications do not include advertising SDKs or third-party tracking frameworks.</li>
+    <li><strong>No Data Collection or Transmission:</strong> We do not collect, process, record, profile, harvest, or monetize any personal information, hardware serial numbers, advertising IDs, or usage analytics.</li>
+    <li><strong>No Internet Communication:</strong> Our applications do not declare or request the <code>android.permission.INTERNET</code> permission in their manifests and function completely offline.</li>
+    <li><strong>No Third-Party SDKs:</strong> Our codebases contain zero third-party software development kits (SDKs), advertising networks, telemetry monitors, or remote crash reporters (e.g., no Firebase, AdMob, or Sentry).</li>
   </ul>
 
-  <h2>2. Application-Specific Data Handling</h2>
+  <h2>2. User Accounts &amp; Data Deletion</h2>
+  <p>
+    In compliance with Google Play Developer Policies:
+  </p>
+  <ul>
+    <li><strong>No User Accounts:</strong> LabWorx applications do not create, host, or link user accounts, credentials, or profiles.</li>
+    <li><strong>Account Deletion Exemption:</strong> Because no user profiles or personal records are maintained on any remote servers, no account deletion mechanisms or web deletion request forms are required.</li>
+    <li><strong>Local Cache Removal:</strong> Any operational preferences stored locally on the device (within private sandbox storage like Jetpack DataStore) can be removed at any time via <strong>Android Settings &gt; Apps &gt; [App Name] &gt; Storage &gt; Clear Data</strong> or by uninstalling the application.</li>
+  </ul>
 
-  <!-- App 1: LostMode -->
+  <h2>3. Application-Specific Disclosures &amp; Permissions</h2>
+
+  <!-- App 1: Virtual Buttons -->
+  <div class="app-card" id="virtualbuttons">
+    <span class="pill">Application Disclosure</span>
+    <h3>LabWorx Virtual Buttons</h3>
+    <p>
+      An assistive utility providing on-screen software replacements for hardware buttons (such as lock screen toggles and media volume controls), designed for users with impaired motor functions or devices with malfunctioning physical buttons.
+    </p>
+
+    <h4>1. AccessibilityService API Disclosure (Mandatory Google Play Notice)</h4>
+    <ul>
+      <li><strong>Specific Scope &amp; Purpose:</strong> The application uses the Android Accessibility Service API (<code>VirtualAccessibilityService</code>) strictly to trigger the system-level lock screen action (<code>GLOBAL_ACTION_LOCK_SCREEN</code>) upon direct user interaction.</li>
+      <li><strong>No Content Inspection or Logging:</strong> The service is explicitly declared with <code>canRetrieveWindowContent="false"</code>. It does not read, intercept, monitor, inspect, log, or transmit on-screen text, gestures, keystrokes, personal communications, or user interactions.</li>
+      <li><strong>No Audio or Surveillance:</strong> The Accessibility Service is never used for audio recording, call recording, background surveillance, remote access, or bypassing system security controls.</li>
+      <li><strong>Prominent In-App Consent:</strong> The application displays a prominent disclosure explaining these exact capabilities and requests voluntary user consent before guiding the user to Android Settings to activate the service. Users can disable this permission at any time via system settings.</li>
+    </ul>
+
+    <h4>2. Additional Permissions &amp; Data Handling</h4>
+    <ul>
+      <li><strong>Quick Settings Tiles (<code>BIND_QUICK_SETTINGS_TILE</code>):</strong> Used exclusively to display optional "Screen Lock" and "Media Volume" tiles within the device's Quick Settings notification shade.</li>
+      <li><strong>Zero Telemetry &amp; Offline Architecture:</strong> Contains no analytics SDKs, advertising frameworks, crash-logging tools, or remote network access (no <code>INTERNET</code> permission requested).</li>
+      <li><strong>No Accounts or Remote Storage:</strong> Does not create or manage user accounts, and stores zero personal data locally or in the cloud.</li>
+    </ul>
+  </div>
+
+  <!-- App 2: LostMode -->
   <div class="app-card" id="lostmode">
     <span class="pill">Application Disclosure</span>
     <h3>LabWorx LostMode</h3>
     <p>
-      An enterprise kiosk utility designed to display custom emergency or recovery information when a managed device is marked lost.
+      An enterprise kiosk utility designed to display administrative recovery details and contact notices when a managed handset is marked lost.
     </p>
     <ul>
-      <li><strong>Permissions:</strong> Requests <strong>zero runtime or system permissions</strong> in its manifest (including no <code>INTERNET</code> permission). It runs entirely isolated and offline.</li>
-      <li><strong>Local Volatile Memory:</strong> Configuration strings (canvas background colors, font sizing, and notification text) delivered via Android's native <code>RestrictionsManager</code> are processed solely in temporary RAM to render the screen. Nothing is stored in persistent local databases or sent outside the device.</li>
-      <li><strong>No Interactivity:</strong> The app does not collect user inputs, form submissions, or touch analytics.</li>
+      <li><strong>Permissions:</strong> Declares zero runtime or system permissions in its manifest (including no <code>INTERNET</code> permission).</li>
+      <li><strong>Volatile Memory (RAM):</strong> Managed enterprise configuration strings received via Android's native <code>RestrictionsManager</code> are processed solely in temporary volatile memory to render the UI. No records are written to persistent databases or transmitted off-device.</li>
+      <li><strong>No Interactivity:</strong> Collects no user inputs, forms, keystrokes, or touch analytics.</li>
     </ul>
   </div>
 
-  <!-- App 2: Managed Config Demo -->
+  <!-- App 3: Managed Config Demo -->
   <div class="app-card" id="managedconfig">
     <span class="pill">Application Disclosure</span>
     <h3>LabWorx Managed Config Demo</h3>
@@ -178,13 +234,13 @@
       A technical demonstration utility for evaluating Android Managed Configurations via Enterprise Mobility Management (EMM/MDM) solutions.
     </p>
     <ul>
-      <li><strong>Permissions:</strong> Operates entirely offline with zero network permissions requested in its manifest.</li>
-      <li><strong>Sandbox Data Persistence:</strong> Field values (User Name, Email Address, Serial Number) and demo sync timestamps are stored strictly on the device using <strong>Jetpack DataStore</strong> within the private app sandbox. This data never leaves the handset and is permanently removed upon app uninstallation.</li>
+      <li><strong>Permissions:</strong> Operates entirely offline with zero network permissions.</li>
+      <li><strong>Local Sandbox Persistence:</strong> Field values (User Name, Email Address, Serial Number) and sync timestamps are stored strictly on the device using <strong>Jetpack DataStore</strong> within the private app sandbox. This data never leaves the handset and is purged upon app uninstallation.</li>
       <li><strong>Managed Configuration Sync:</strong> Restrictions received via <code>ACTION_APPLICATION_RESTRICTIONS_CHANGED</code> are applied locally via the standard Android framework.</li>
     </ul>
   </div>
 
-  <!-- Future Applications Default -->
+  <!-- Framework Default -->
   <div class="app-card" id="future-apps">
     <span class="pill">Framework Default</span>
     <h3>Future LabWorx Utilities</h3>
@@ -193,23 +249,60 @@
     </p>
   </div>
 
-  <h2>3. Children’s Privacy</h2>
+  <h2>4. Google Play Data Safety Reference</h2>
   <p>
-    All LabWorx applications are intended strictly for enterprise IT administrators, device managers, and business testing. Because none of our applications collect, process, or transmit personal data, they comply fully with COPPA and GDPR requirements regarding children.
+    The following declarations reflect our configurations in the Google Play Console Data Safety questionnaire for our applications:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Explanation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Data Collection &amp; Sharing</strong></td>
+        <td>No data collected or shared</td>
+        <td>All processing is local; no user data leaves the device.</td>
+      </tr>
+      <tr>
+        <td><strong>Accessibility Service Usage</strong></td>
+        <td>Compliant / Local Only</td>
+        <td>Used strictly for <code>GLOBAL_ACTION_LOCK_SCREEN</code> with <code>canRetrieveWindowContent="false"</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Data Encryption in Transit</strong></td>
+        <td>Not Applicable</td>
+        <td>Apps declare no network permissions; no data travels over the wire.</td>
+      </tr>
+      <tr>
+        <td><strong>Account Deletion URL</strong></td>
+        <td>Not Applicable</td>
+        <td>Apps do not offer or require user accounts.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>5. Children’s Privacy</h2>
+  <p>
+    LabWorx applications are intended for enterprise IT personnel, business device testing, and general device utility workflows. Because none of our applications collect or transmit any personal data, our software complies fully with the Children’s Online Privacy Protection Act (COPPA) and GDPR regulations regarding minors.
   </p>
 
-  <h2>4. Updates to This Policy</h2>
+  <h2>6. Policy Updates</h2>
   <p>
-    We may periodically update this policy to reflect newly published utilities or platform changes. The latest version will always be accessible at this address with an updated revision date.
+    We may update this policy periodically to reflect updates across our utility suite. Revisions will be posted directly to this page with an updated effective date.
   </p>
 
-  <h2>5. Contact Us</h2>
+  <h2>7. Contact Us</h2>
   <p>
     If you have questions regarding this Privacy Policy or application security, contact:
   </p>
   <ul>
     <li><strong>Developer / Publisher:</strong> LabWorx</li>
     <li><strong>Email:</strong> <a href="mailto:labworx.studio@gmail.com">labworx.studio@gmail.com</a></li>
+    <li><strong>Policy URL:</strong> <a href="https://graphiteduck.github.io/labworx-privacy/">https://graphiteduck.github.io/labworx-privacy/</a></li>
   </ul>
 
   <div class="footer">
