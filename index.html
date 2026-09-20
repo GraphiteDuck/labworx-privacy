@@ -61,9 +61,18 @@
 
     h3 {
       color: #ffffff;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       margin-top: 0;
       margin-bottom: 8px;
+    }
+
+    h4 {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
     }
 
     p, li {
@@ -97,8 +106,8 @@
       border: 1px solid #333333;
       border-left: 4px solid var(--accent);
       border-radius: 6px;
-      padding: 20px;
-      margin: 20px 0;
+      padding: 22px;
+      margin: 22px 0;
     }
 
     .pill {
@@ -159,7 +168,7 @@
 <div class="container">
   <h1>Privacy Policy</h1>
   <div class="subheading">
-    <strong>LabWorx Mobile Applications</strong> &bull; Effective Date: September 20, 2026
+    <strong>LabWorx Applications</strong> &bull; Effective Date: September 20, 2026
   </div>
 
   <p>
@@ -171,72 +180,77 @@
     All LabWorx applications operate with a strict <strong>Zero Remote Data Collection</strong> architecture:
   </p>
   <ul>
-    <li><strong>No Data Collection or Transmission:</strong> We do not collect, process, record, profile, harvest, or monetize any personal information, hardware serial numbers, advertising IDs, or usage analytics.</li>
-    <li><strong>No Internet Communication:</strong> Our applications do not declare or request the <code>android.permission.INTERNET</code> permission in their manifests and function completely offline.</li>
+    <li><strong>No Personal Data Harvesting:</strong> We do not collect, process, record, profile, transmit, or monetize any personal identifiable information (PII), device identifiers, or biometric data.</li>
+    <li><strong>No Network Transmission:</strong> Our applications do not request or declare the <code>android.permission.INTERNET</code> permission in their manifests and function completely offline.</li>
     <li><strong>No Third-Party SDKs:</strong> Our codebases contain zero third-party software development kits (SDKs), advertising networks, telemetry monitors, or remote crash reporters (e.g., no Firebase, AdMob, or Sentry).</li>
   </ul>
 
-  <h2>2. User Accounts &amp; Data Deletion</h2>
+  <h2>2. User Accounts &amp; Data Deletion Policy</h2>
   <p>
-    In compliance with Google Play Developer Policies:
+    In compliance with Google Play Developer Policies regarding account creation and user data retention:
   </p>
   <ul>
-    <li><strong>No User Accounts:</strong> LabWorx applications do not create, host, or link user accounts, credentials, or profiles.</li>
-    <li><strong>Account Deletion Exemption:</strong> Because no user profiles or personal records are maintained on any remote servers, no account deletion mechanisms or web deletion request forms are required.</li>
-    <li><strong>Local Cache Removal:</strong> Any operational preferences stored locally on the device (within private sandbox storage like Jetpack DataStore) can be removed at any time via <strong>Android Settings &gt; Apps &gt; [App Name] &gt; Storage &gt; Clear Data</strong> or by uninstalling the application.</li>
+    <li><strong>No Account Creation:</strong> LabWorx applications do not offer, require, or support account registration, authentication credentials, or user profile creation.</li>
+    <li><strong>Account Deletion Exemption:</strong> Because no accounts or remote user profiles are maintained, no account deletion mechanisms or web deletion request forms are required.</li>
+    <li><strong>Local Data Removal:</strong> Any operational values stored on the device within an application's private sandbox (e.g., Jetpack DataStore preferences) can be deleted at any time by clearing application data via <strong>Android Settings &gt; Apps &gt; [App Name] &gt; Storage &gt; Clear Data</strong>, or by uninstalling the application.</li>
   </ul>
 
   <h2>3. Application-Specific Disclosures &amp; Permissions</h2>
 
-  <!-- App 1: Virtual Buttons -->
-  <div class="app-card" id="virtualbuttons">
-    <span class="pill">Application Disclosure</span>
-    <h3>LabWorx Virtual Buttons</h3>
-    <p>
-      An assistive utility providing on-screen software replacements for hardware buttons (such as lock screen toggles and media volume controls), designed for users with impaired motor functions or devices with malfunctioning physical buttons.
-    </p>
-
-    <h4>1. AccessibilityService API Disclosure (Mandatory Google Play Notice)</h4>
-    <ul>
-      <li><strong>Specific Scope &amp; Purpose:</strong> The application uses the Android Accessibility Service API (<code>VirtualAccessibilityService</code>) strictly to trigger the system-level lock screen action (<code>GLOBAL_ACTION_LOCK_SCREEN</code>) upon direct user interaction.</li>
-      <li><strong>No Content Inspection or Logging:</strong> The service is explicitly declared with <code>canRetrieveWindowContent="false"</code>. It does not read, intercept, monitor, inspect, log, or transmit on-screen text, gestures, keystrokes, personal communications, or user interactions.</li>
-      <li><strong>No Audio or Surveillance:</strong> The Accessibility Service is never used for audio recording, call recording, background surveillance, remote access, or bypassing system security controls.</li>
-      <li><strong>Prominent In-App Consent:</strong> The application displays a prominent disclosure explaining these exact capabilities and requests voluntary user consent before guiding the user to Android Settings to activate the service. Users can disable this permission at any time via system settings.</li>
-    </ul>
-
-    <h4>2. Additional Permissions &amp; Data Handling</h4>
-    <ul>
-      <li><strong>Quick Settings Tiles (<code>BIND_QUICK_SETTINGS_TILE</code>):</strong> Used exclusively to display optional "Screen Lock" and "Media Volume" tiles within the device's Quick Settings notification shade.</li>
-      <li><strong>Zero Telemetry &amp; Offline Architecture:</strong> Contains no analytics SDKs, advertising frameworks, crash-logging tools, or remote network access (no <code>INTERNET</code> permission requested).</li>
-      <li><strong>No Accounts or Remote Storage:</strong> Does not create or manage user accounts, and stores zero personal data locally or in the cloud.</li>
-    </ul>
-  </div>
-
-  <!-- App 2: LostMode -->
-  <div class="app-card" id="lostmode">
-    <span class="pill">Application Disclosure</span>
-    <h3>LabWorx LostMode</h3>
-    <p>
-      An enterprise kiosk utility designed to display administrative recovery details and contact notices when a managed handset is marked lost.
-    </p>
-    <ul>
-      <li><strong>Permissions:</strong> Declares zero runtime or system permissions in its manifest (including no <code>INTERNET</code> permission).</li>
-      <li><strong>Volatile Memory (RAM):</strong> Managed enterprise configuration strings received via Android's native <code>RestrictionsManager</code> are processed solely in temporary volatile memory to render the UI. No records are written to persistent databases or transmitted off-device.</li>
-      <li><strong>No Interactivity:</strong> Collects no user inputs, forms, keystrokes, or touch analytics.</li>
-    </ul>
-  </div>
-
-  <!-- App 3: Managed Config Demo -->
+  <!-- App 1: Managed Config Demo -->
   <div class="app-card" id="managedconfig">
     <span class="pill">Application Disclosure</span>
     <h3>LabWorx Managed Config Demo</h3>
     <p>
-      A technical demonstration utility for evaluating Android Managed Configurations via Enterprise Mobility Management (EMM/MDM) solutions.
+      A technical evaluation and demonstration utility for testing Android Managed Configurations delivered via Enterprise Mobility Management (EMM/MDM) systems.
+    </p>
+    <h4>Local Data Handling</h4>
+    <p>The application processes three configuration attributes solely on the local device:</p>
+    <ul>
+      <li><strong>User Name:</strong> Processed locally to display user identification.</li>
+      <li><strong>Email Address:</strong> Processed locally to populate enterprise account testing fields.</li>
+      <li><strong>Serial Number:</strong> Processed locally to identify hardware/software test assets.</li>
+    </ul>
+    <h4>Permissions &amp; Architecture</h4>
+    <ul>
+      <li><strong>Permissions:</strong> Requests <strong>zero system permissions</strong> in its manifest (no <code>INTERNET</code> permission, no runtime permissions). It cannot connect to external networks or access sensitive device hardware (such as cameras, location, or microphone).</li>
+      <li><strong>Enterprise Managed Configurations:</strong> Policies deployed by an IT administrator are received locally via Android's native <code>RestrictionsManager</code> framework and the <code>ACTION_APPLICATION_RESTRICTIONS_CHANGED</code> broadcast. No configuration data or management events are transmitted to external servers.</li>
+      <li><strong>Sandbox Data Persistence:</strong> User preferences and synchronization timestamps are stored strictly on the device using <strong>Jetpack DataStore</strong> in isolated application storage. Data is purged upon application uninstallation.</li>
+    </ul>
+  </div>
+
+  <!-- App 2: Virtual Buttons -->
+  <div class="app-card" id="virtualbuttons">
+    <span class="pill">Application Disclosure</span>
+    <h3>LabWorx Virtual Buttons</h3>
+    <p>
+      An assistive utility providing on-screen software replacements for hardware buttons (such as lock screen toggles and media volume controls), designed for users with impaired motor functions or devices with malfunctioning physical keys.
+    </p>
+    <h4>AccessibilityService API Disclosure (Google Play Notice)</h4>
+    <ul>
+      <li><strong>Scope &amp; Purpose:</strong> The application uses the Android Accessibility Service API (<code>VirtualAccessibilityService</code>) solely to trigger the system-level screen lock action (<code>GLOBAL_ACTION_LOCK_SCREEN</code>).</li>
+      <li><strong>No Content Inspection or Logging:</strong> Configured explicitly with <code>canRetrieveWindowContent="false"</code>. It does not read, intercept, monitor, inspect, log, or transmit on-screen text, gestures, keystrokes, personal communications, or user interactions.</li>
+      <li><strong>No Audio or Surveillance:</strong> Never used for audio recording, call recording, background surveillance, remote access, or bypassing system security controls.</li>
+      <li><strong>Prominent Consent:</strong> Displays an in-app prominent disclosure explaining this capability before guiding the user to system settings to voluntarily enable the service.</li>
+    </ul>
+    <h4>Additional Permissions &amp; Offline Execution</h4>
+    <ul>
+      <li><strong>Quick Settings Tiles (<code>BIND_QUICK_SETTINGS_TILE</code>):</strong> Used exclusively to display user-controlled "Screen Lock" and "Media Volume" tiles in the Android notification shade.</li>
+      <li><strong>Offline Execution:</strong> Operates completely offline with zero network permissions and zero tracking SDKs.</li>
+    </ul>
+  </div>
+
+  <!-- App 3: LostMode -->
+  <div class="app-card" id="lostmode">
+    <span class="pill">Application Disclosure</span>
+    <h3>LabWorx LostMode</h3>
+    <p>
+      An enterprise kiosk utility designed to display administrative recovery details and contact notices when a managed handset is placed in lost status.
     </p>
     <ul>
-      <li><strong>Permissions:</strong> Operates entirely offline with zero network permissions.</li>
-      <li><strong>Local Sandbox Persistence:</strong> Field values (User Name, Email Address, Serial Number) and sync timestamps are stored strictly on the device using <strong>Jetpack DataStore</strong> within the private app sandbox. This data never leaves the handset and is purged upon app uninstallation.</li>
-      <li><strong>Managed Configuration Sync:</strong> Restrictions received via <code>ACTION_APPLICATION_RESTRICTIONS_CHANGED</code> are applied locally via the standard Android framework.</li>
+      <li><strong>Permissions:</strong> Requests zero runtime or system permissions in its manifest (including no <code>INTERNET</code> permission).</li>
+      <li><strong>Volatile Memory (RAM):</strong> Managed enterprise configuration payloads (such as background hex codes, notification headers, and support phone numbers) broadcasted by an EMM console via <code>RestrictionsManager</code> are parsed purely in temporary volatile memory to render the UI. No records are written to persistent databases or transmitted off-device.</li>
+      <li><strong>No Interactivity:</strong> Collects no user input, keystrokes, form submissions, or diagnostic telemetry.</li>
     </ul>
   </div>
 
@@ -245,13 +259,13 @@
     <span class="pill">Framework Default</span>
     <h3>Future LabWorx Utilities</h3>
     <p>
-      Unless explicitly accompanied by a dedicated addendum, all future enterprise and utility tools published under the LabWorx developer identity inherit the baseline terms of this policy: strictly offline execution, zero telemetry/analytics SDKs, and local-only sandbox persistence.
+      Unless accompanied by an explicit standalone privacy addendum, any future utilities released by LabWorx inherit these baseline policies: strictly offline execution, zero outbound network traffic, zero third-party telemetry libraries, and private sandbox storage exclusively.
     </p>
   </div>
 
   <h2>4. Google Play Data Safety Reference</h2>
   <p>
-    The following declarations reflect our configurations in the Google Play Console Data Safety questionnaire for our applications:
+    The following declarations reflect our configurations in the Google Play Console Data Safety questionnaire for all three applications:
   </p>
   <table>
     <thead>
@@ -275,12 +289,17 @@
       <tr>
         <td><strong>Data Encryption in Transit</strong></td>
         <td>Not Applicable</td>
-        <td>Apps declare no network permissions; no data travels over the wire.</td>
+        <td>Apps declare no network permissions; no data travels over a network.</td>
       </tr>
       <tr>
         <td><strong>Account Deletion URL</strong></td>
         <td>Not Applicable</td>
-        <td>Apps do not offer or require user accounts.</td>
+        <td>Apps do not offer, manage, or require user accounts.</td>
+      </tr>
+      <tr>
+        <td><strong>Local Data Deletion</strong></td>
+        <td>Supported via OS</td>
+        <td>Users or MDM administrators can purge local sandbox storage at any time via App Settings or uninstallation.</td>
       </tr>
     </tbody>
   </table>
@@ -295,9 +314,9 @@
     We may update this policy periodically to reflect updates across our utility suite. Revisions will be posted directly to this page with an updated effective date.
   </p>
 
-  <h2>7. Contact Us</h2>
+  <h2>7. Contact Information</h2>
   <p>
-    If you have questions regarding this Privacy Policy or application security, contact:
+    If you have questions regarding this Privacy Policy, our data architecture, or application security, contact:
   </p>
   <ul>
     <li><strong>Developer / Publisher:</strong> LabWorx</li>
